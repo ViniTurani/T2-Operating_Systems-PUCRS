@@ -5,13 +5,13 @@ import random
 
 def generate_virtual_addresses(num_addresses, virtual_memory_bits):
     return [random.randint(0, 2**virtual_memory_bits - 1) for _ in range(num_addresses)]
-
+#  nao usar random ou escolehr random com salt
 def main():
     # Configurações do sistema de gerenciamento de memória
     virtual_memory_bits = 16  # Exemplo: 2^16 para o tamanho da memória virtual
     physical_memory_bits = 12  # Exemplo: 2^12 para o tamanho da memória física
     page_size_bits = 8  # Exemplo: 2^8 para o tamanho da página
-
+    #  input 
     allocator = MemoryAllocator(virtual_memory_bits, physical_memory_bits, page_size_bits)
     num_virtual_addresses = 10
     virtual_addresses = generate_virtual_addresses(num_virtual_addresses, virtual_memory_bits)
