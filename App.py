@@ -3,19 +3,26 @@
 from src.memory_allocator import MemoryAllocator
 import random
 
-def generate_virtual_addresses(num_addresses, virtual_memory_bits):
-    return [random.randint(0, 2**virtual_memory_bits - 1) for _ in range(num_addresses)]
+def transformStrToBits(value: str):
+    addresses = value.split(", ")
+    return [(int(address)) for address in addresses]
+
 #  nao usar random ou escolehr random com salt
 def main():
     # Configurações do sistema de gerenciamento de memória
-    virtual_memory_bits = 16  # Exemplo: 2^16 para o tamanho da memória virtual
-    physical_memory_bits = 12  # Exemplo: 2^12 para o tamanho da memória física
-    page_size_bits = 8  # Exemplo: 2^8 para o tamanho da página
-    #  input 
+    print("Configurações do sistema de gerenciamento de memória:")
+
+    virtual_memory_bits =  input("Digite a quantidade de bits para o tamanho da memória virtual: 2^")
+    virtual_memory_bits = int(virtual_memory_bits)
+    physical_memory_bits = input("Digite a quantidade d bits para o tamanho da memoria fisica: 2^x") # Exemplo: 2^12 para o tamanho da memória física
+    physical_memory_bits = int(physical_memory_bits)
+    page_size_bits = input("Digite a quantidade de bits para o tamanho da pagina: 2^x")  # Exemplo: 2^8 para o tamanho da página
+    page_size_bits = int(page_size_bits)                  
+
     allocator = MemoryAllocator(virtual_memory_bits, physical_memory_bits, page_size_bits)
-    num_virtual_addresses = 10
-    virtual_addresses = generate_virtual_addresses(num_virtual_addresses, virtual_memory_bits)
-    
+    value = input("Digite os endereços virtuais a serem traduzidos: ")
+    virtual_addresses = transformStrToBits(value)
+
     print("Endereço Virtual -> Endereço Físico")
     for va in virtual_addresses:
         try:
